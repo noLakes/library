@@ -19,17 +19,35 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(newBook);
 }
 
-
+// creates a HTML element from a book obj
 function bookElement(book) {
-  const book = document.createElement('div');
-  book.classList.add('book_container');
+  let bookElement = document.createElement('div');
+  bookElement.classList.add('book_container');
 
-  const list = document.createElement('ul');
-  book.appendChild(list);
-  
-  //loop over book values and append them to list as list items?
+  let list = document.createElement('ul');
+  bookElement.appendChild(list);
 
+  for (key in book) {
+    if (book.hasOwnProperty(key)) {
+      let info = document.createElement('li');
+      info.innerHTML = book[key];
+      list.appendChild(info);
+    }
+  }
+  return bookElement;
 }
 
-let book = new Book('Microserfs', 'Douglas Couplnad', 371, true);
-console.log(book.info());
+addBookToLibrary('Microserfs', 'Douglas Couplnad', 371, true);
+addBookToLibrary('Jicroserfs', 'Fouglas Fouplnad', 371, true);
+addBookToLibrary('Picroserfs', 'Bouglas Mouplnad', 371, true);
+addBookToLibrary('Gicroserfs', 'Oouglas Souplnad', 371, true);
+addBookToLibrary('Sicroserfs', 'Pouglas Douplnad', 371, true);
+
+const bookContainer = document.querySelector('div.books');
+
+myLibrary.forEach(book => {
+  bookContainer.appendChild(bookElement(book));
+});
+
+
+
