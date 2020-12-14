@@ -15,14 +15,14 @@ Book.prototype.info = function() {
 
 // creates a book obj from arguments given and appends it to the library
 function addBookToLibrary(title, author, pages, read) {
-  const newBook = new Book(title, author, pages, read);
+  const newBook = new Book(title, author, pages, read ? 'Read' : 'Not Read');
   myLibrary.push(newBook);
 }
 
 // creates a HTML element from a book obj
 function bookElement(book) {
   let bookElement = document.createElement('div');
-  bookElement.classList.add('book_container');
+  bookElement.classList.add('book');
 
   let list = document.createElement('ul');
   bookElement.appendChild(list);
@@ -43,7 +43,7 @@ addBookToLibrary('Picroserfs', 'Bouglas Mouplnad', 371, true);
 addBookToLibrary('Gicroserfs', 'Oouglas Souplnad', 371, true);
 addBookToLibrary('Sicroserfs', 'Pouglas Douplnad', 371, true);
 
-const bookContainer = document.querySelector('div.books');
+const bookContainer = document.querySelector('.books-container');
 const bookForm = document.querySelector('.book-form');
 
 myLibrary.forEach(book => {

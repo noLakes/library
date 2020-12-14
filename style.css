@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: cornflowerblue;
+}
+
+.books-container {
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: calc(25% - 20px);
+  border: 1px solid rgb(29, 186, 186);
+  background-color: lightsteelblue;
+  border-radius: 5%;
+}
+
+.book ul {
+  padding: 1rem;
+}
+
+.book li {
+  list-style: none;
+}
