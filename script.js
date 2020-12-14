@@ -22,42 +22,59 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(newBook);
 }
 
+// deletes book from doc and library
 function deleteBook(e) {
-  console.log(e.target);
+  let bookDiv = e.target.parentElement.parentElement
+  myLibrary.splice(bookDiv.dataset.indexNumber, 1);
+  bookDiv.remove();
 }
 
+// toggles read status in doc and library
 function toggleRead(e) {
-  console.log(e);
 }
 
-// creates a HTML element for a book obj
-function bookElement(book, index) {
-  let bookElement = document.createElement('div');
-  bookElement.classList.add('book');
-  bookElement.setAttribute('data-index-number', index);
-
-  let list = document.createElement('ul');
-  bookElement.appendChild(list);
-
+// creates a delete button
+function delButton() {
   let delButton = document.createElement('button');
   delButton.classList.add('delete-book');
   delButton.addEventListener('click', deleteBook);
   delButton.innerHTML = ('delete');
+  return delButton;
+}
 
+// creates a read toggle button
+function readButton() {
   let readButton = document.createElement('button');
   readButton.classList.add('toggle-read');
   readButton.addEventListener('click', toggleRead);
   readButton.innerHTML = ('toggle read');
+  return readButton;
+}
 
-  let buttonContainer = document.createElement('div');
-  buttonContainer.classList.add('button-container');
-  buttonContainer.appendChild(readButton);
-  buttonContainer.appendChild(delButton);
-  bookElement.appendChild(buttonContainer);
+// creates a div containing the two above buttons
+function buttonsDiv() {
+  let buttonDiv = document.createElement('div');
+  buttonDiv.classList.add('button-container');
+  buttonDiv.appendChild(readButton());
+  buttonDiv.appendChild(delButton());
+  return buttonDiv;
+}
+
+// creates a HTML element for a book obj
+function bookDiv(book, index) {
+  let bookDiv = document.createElement('div');
+  bookDiv.classList.add('book');
+  bookDiv.setAttribute('data-index-number', index);
+
+  let list = document.createElement('ul');
+  bookDiv.appendChild(list);
+
+  bookDiv.appendChild(buttonsDiv());
 
   for (key in book) {
     if (book.hasOwnProperty(key)) {
       let info = document.createElement('li');
+      info.classList.add(`${key}`);
       if (key === 'pages') {
         info.innerHTML = `${book[key]} pages`;
       } else {
@@ -66,7 +83,7 @@ function bookElement(book, index) {
       list.appendChild(info);
     }
   }
-  return bookElement; 
+  return bookDiv; 
 }
 
 addBookToLibrary('Microserfs', 'Douglas Coupland', 371, true);
@@ -76,7 +93,7 @@ addBookToLibrary('Gicroserfs', 'Oouglas Soupland', 371, true);
 addBookToLibrary('Sicroserfs', 'Pouglas Doupland', 371, true);
 
 myLibrary.forEach((book, index) => {
-  bookContainer.appendChild(bookElement(book, index));
+  bookContainer.appendChild(bookDiv(book, index));
 });
 
 // makes new book from form values and appends it to the book container
@@ -89,6 +106,6 @@ function saveBook() {
   );
   addBookToLibrary(...book);
   bookForm.reset();
-  bookContainer.appendChild(bookElement(myLibrary[myLibrary.length -1], myLibrary.length -1));
+  bookContainer.appendChild(bookDiv(myLibrary[myLibrary.length -1], myLibrary.length -1));
 }
 
