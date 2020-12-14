@@ -98,13 +98,12 @@ myLibrary.forEach((book, index) => {
 
 // makes new book from form values and appends it to the book container
 function saveBook() {
-  let book = new Array(
+  addBookToLibrary(
     document.querySelector('.book-form #title').value,
     document.querySelector('.book-form #author').value,
     document.querySelector('.book-form #pages').value,
-    document.querySelector('.book-form #read').checked 
+    document.querySelector('.book-form #read').checked
   );
-  addBookToLibrary(...book);
   bookForm.reset();
   bookContainer.appendChild(bookDiv(myLibrary[myLibrary.length -1], myLibrary.length -1));
 }
