@@ -16,10 +16,11 @@ html {
   display: flex;
   flex-direction: column;
   margin: 10px;
-  width: calc(25% - 20px);
+  width: calc(20% - 20px);
   border: 1px solid rgb(29, 186, 186);
   background-color: lightsteelblue;
   border-radius: 5%;
+  font-size: 18px;
 }
 
 .book ul {
