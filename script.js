@@ -34,7 +34,7 @@ function bookElement(book) {
       list.appendChild(info);
     }
   }
-  return bookElement;
+  return bookElement; 
 }
 
 addBookToLibrary('Microserfs', 'Douglas Couplnad', 371, true);
@@ -44,10 +44,21 @@ addBookToLibrary('Gicroserfs', 'Oouglas Souplnad', 371, true);
 addBookToLibrary('Sicroserfs', 'Pouglas Douplnad', 371, true);
 
 const bookContainer = document.querySelector('div.books');
+const bookForm = document.querySelector('.book-form');
 
 myLibrary.forEach(book => {
   bookContainer.appendChild(bookElement(book));
 });
 
-
-
+// makes new book from form values and appends it to the book container
+function saveBook() {
+  let book = new Array(
+    document.querySelector('.book-form #title').value,
+    document.querySelector('.book-form #author').value,
+    document.querySelector('.book-form #pages').value,
+    document.querySelector('.book-form #read').checked 
+  );
+  addBookToLibrary(...book);
+  bookForm.reset();
+  bookContainer.appendChild(bookElement(myLibrary[myLibrary.length -1]));
+}
