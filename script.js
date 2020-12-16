@@ -4,18 +4,6 @@ if (localStorage['myLibrary']) {
   myLibrary = JSON.parse(localStorage['myLibrary']);
 }
 
-// populate the library (if empty) in testing
-if (myLibrary.length === 0) {
-  addBookToLibrary('Microserfs', 'Douglas Coupland', 371, true);
-  addBookToLibrary('Jicroserfs', 'Fouglas Foupland', 371, true);
-  addBookToLibrary('Picroserfs', 'Bouglas Moupland', 371, true);
-  addBookToLibrary('Gicroserfs', 'Oouglas Soupland', 371, true);
-  addBookToLibrary('Sicroserfs', 'Pouglas Doupland', 371, true);
-}
-
-const bookContainer = document.querySelector('.books-container');
-const bookForm = document.querySelector('.book-form');
-
 // book constructor
 function Book(title, author, pages, read) {
   this.title = title;
@@ -24,16 +12,14 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-// returns a string of the books properties
-Book.prototype.info = function() {
-  return `${this.title}, by ${this.author}, ${this.pages} pages, ${this.read ? 'finished' : 'not yet read'}.`
-}
+const bookContainer = document.querySelector('.books-container');
+const bookForm = document.querySelector('.book-form');
 
 // creates a book obj from arguments given and appends it to the library
 function addBookToLibrary(title, author, pages, read) {
-  const newBook = new Book(title, author, pages, read ? 'Read' : 'Not Read');
+  const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
-  saveLibrary()
+  saveLibrary();
 }
 
 // saves library to local storage (as 'myLibrary')
@@ -45,13 +31,21 @@ function saveLibrary() {
 
 // deletes book from doc and library
 function deleteBook(e) {
-  let bookDiv = e.target.parentElement.parentElement
+  const bookDiv = e.target.parentElement.parentElement
   myLibrary.splice(bookDiv.dataset.indexNumber, 1);
   bookDiv.remove();
+  saveAndReload();
 }
 
 // toggles read status in doc and library
 function toggleRead(e) {
+  const bookDiv = e.target.parentElement.parentElement
+  if (myLibrary[bookDiv.dataset.indexNumber].read) {
+    myLibrary[bookDiv.dataset.indexNumber].read = false;
+  } else {
+    myLibrary[bookDiv.dataset.indexNumber].read = true;
+  }
+  saveAndReload();
 }
 
 // creates a delete button
@@ -98,6 +92,8 @@ function bookDiv(book, index) {
       info.classList.add(`${key}`);
       if (key === 'pages') {
         info.innerHTML = `${book[key]} pages`;
+      } else if (key === 'read') {
+        info.innerHTML = book[key] ? 'Read' : 'Not read';
       } else {
         info.innerHTML = book[key];
       }
@@ -107,12 +103,8 @@ function bookDiv(book, index) {
   return bookDiv; 
 }
 
-myLibrary.forEach((book, index) => {
-  bookContainer.appendChild(bookDiv(book, index));
-});
-
 // makes new book from form values and appends it to the book container
-function saveBook() {
+function submitBook() {
   addBookToLibrary(
     document.querySelector('.book-form #title').value,
     document.querySelector('.book-form #author').value,
@@ -120,5 +112,31 @@ function saveBook() {
     document.querySelector('.book-form #read').checked
   );
   bookForm.reset();
-  bookContainer.appendChild(bookDiv(myLibrary[myLibrary.length -1], myLibrary.length -1));
+  saveAndReload();
 }
+
+// populate the library (if empty) in testing
+if (myLibrary.length === 0) {
+  addBookToLibrary('Microserfs', 'Douglas Coupland', 371, true);
+  addBookToLibrary('Jicroserfs', 'Fouglas Foupland', 371, true);
+  addBookToLibrary('Picroserfs', 'Bouglas Moupland', 371, true);
+  addBookToLibrary('Gicroserfs', 'Oouglas Soupland', 371, true);
+  addBookToLibrary('Sicroserfs', 'Pouglas Doupland', 371, true);
+}
+
+// creates and appends a book element for each book in myLibrary
+function updateDisplay() {
+  bookContainer.innerHTML = ''
+  myLibrary.forEach((book, index) => {
+    bookContainer.appendChild(bookDiv(book, index));
+  });
+}
+
+// DRY function - bad idea?
+function saveAndReload() {
+  saveLibrary();
+  updateDisplay();
+}
+
+// loads book elements on page load
+updateDisplay();
