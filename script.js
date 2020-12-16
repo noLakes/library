@@ -1,5 +1,18 @@
 let myLibrary = [];
 
+if (localStorage['myLibrary']) {
+  myLibrary = JSON.parse(localStorage['myLibrary']);
+}
+
+// populate the library (if empty) in testing
+if (myLibrary.length === 0) {
+  addBookToLibrary('Microserfs', 'Douglas Coupland', 371, true);
+  addBookToLibrary('Jicroserfs', 'Fouglas Foupland', 371, true);
+  addBookToLibrary('Picroserfs', 'Bouglas Moupland', 371, true);
+  addBookToLibrary('Gicroserfs', 'Oouglas Soupland', 371, true);
+  addBookToLibrary('Sicroserfs', 'Pouglas Doupland', 371, true);
+}
+
 const bookContainer = document.querySelector('.books-container');
 const bookForm = document.querySelector('.book-form');
 
@@ -20,6 +33,14 @@ Book.prototype.info = function() {
 function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read ? 'Read' : 'Not Read');
   myLibrary.push(newBook);
+  saveLibrary()
+}
+
+// saves library to local storage (as 'myLibrary')
+function saveLibrary() {
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+  console.log('library saved!');
+  console.table(JSON.parse(localStorage['myLibrary']));
 }
 
 // deletes book from doc and library
@@ -86,12 +107,6 @@ function bookDiv(book, index) {
   return bookDiv; 
 }
 
-addBookToLibrary('Microserfs', 'Douglas Coupland', 371, true);
-addBookToLibrary('Jicroserfs', 'Fouglas Foupland', 371, true);
-addBookToLibrary('Picroserfs', 'Bouglas Moupland', 371, true);
-addBookToLibrary('Gicroserfs', 'Oouglas Soupland', 371, true);
-addBookToLibrary('Sicroserfs', 'Pouglas Doupland', 371, true);
-
 myLibrary.forEach((book, index) => {
   bookContainer.appendChild(bookDiv(book, index));
 });
@@ -107,4 +122,3 @@ function saveBook() {
   bookForm.reset();
   bookContainer.appendChild(bookDiv(myLibrary[myLibrary.length -1], myLibrary.length -1));
 }
-
