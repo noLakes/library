@@ -111,6 +111,13 @@ function bookDiv(book, index) {
   return bookDiv; 
 }
 
+// returns true if form inputs are valid, false if not
+function checkInputs() {
+  vals = new Array(inputs['title'].value, inputs['author'].value, inputs['pages'].value);
+  if (vals[2] != '' && isNaN(vals[2])) {return false};
+  return !vals.includes('');
+}
+
 // makes new book from form values and appends it to the book container
 function submitBook() {
   addBookToLibrary(
