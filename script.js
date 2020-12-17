@@ -4,6 +4,17 @@ if (localStorage['myLibrary']) {
   myLibrary = JSON.parse(localStorage['myLibrary']);
 }
 
+const bookContainer = document.querySelector('.books-container');
+const bookForm = document.querySelector('.book-form');
+
+const inputs = {
+  'title' : document.querySelector('.book-form #title'),
+  'author' : document.querySelector('.book-form #author'),
+  'pages' : document.querySelector('.book-form #pages'),
+  'read' : document.querySelector('.book-form #read'),
+  'not_read' : document.querySelector('.book-form #not_read')
+}
+
 // book constructor
 function Book(title, author, pages, read) {
   this.title = title;
@@ -11,9 +22,6 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
 }
-
-const bookContainer = document.querySelector('.books-container');
-const bookForm = document.querySelector('.book-form');
 
 // creates a book obj from arguments given and appends it to the library
 function addBookToLibrary(title, author, pages, read) {
@@ -106,10 +114,10 @@ function bookDiv(book, index) {
 // makes new book from form values and appends it to the book container
 function submitBook() {
   addBookToLibrary(
-    document.querySelector('.book-form #title').value,
-    document.querySelector('.book-form #author').value,
-    document.querySelector('.book-form #pages').value,
-    document.querySelector('.book-form #read').checked
+    inputs['title'].value,
+    inputs['author'].value,
+    inputs['pages'].value,
+    inputs['read'].checked
   );
   bookForm.reset();
   saveAndReload();
