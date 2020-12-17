@@ -88,25 +88,59 @@ select {
 }
 
 /* Actual Styling Begins */
+
+/* global css variables (mostly for colors) */
+:root {
+  --udo-dark: #5b87b6;
+  --udo-mid: #98b0c8;
+  --udo-light: #ccd4d7;
+  --udo-red: #fe643a;
+  --udo-white: #efebe8;
+  --udo-black: #37393d;
+}
+
 html {
-  background-color: cornflowerblue;
+  background-color: var(--udo-dark);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  border-bottom: 2px dashed var(--udo-white);
+}
+
+.page-title {
+  color: var(--udo-white);
 }
 
 .books-container {
   display: flex;
   flex-flow: wrap;
   width: 100%;
+  max-width: 1200px;
 }
 
 .book {
   display: flex;
   flex-direction: column;
   margin: 10px;
-  width: calc(20% - 20px);
-  border: 1px solid rgb(29, 186, 186);
-  background-color: lightsteelblue;
+  width: 100%;
+  max-width: 220px;
+  border: 1px solid var(--udo-black);
+  background-color: var(--udo-light);
   border-radius: 5%;
   font-size: 18px;
+  box-shadow: 3px 2px 1px var(--udo-black);
 }
 
 .book ul {
@@ -115,4 +149,10 @@ html {
 
 .book li {
   list-style: none;
+}
+
+@media only screen and (max-width: 499px) {
+  .book {
+    max-width: none;
+  }
 }
