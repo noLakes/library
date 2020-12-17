@@ -33,8 +33,6 @@ function addBookToLibrary(title, author, pages, read) {
 // saves library to local storage (as 'myLibrary')
 function saveLibrary() {
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-  console.log('library saved!');
-  console.table(JSON.parse(localStorage['myLibrary']));
 }
 
 // deletes book from doc and library
@@ -120,6 +118,10 @@ function checkInputs() {
 
 // makes new book from form values and appends it to the book container
 function submitBook() {
+  if (!checkInputs()) {
+    alert('please enter valid book details');
+    return;
+  }
   addBookToLibrary(
     inputs['title'].value,
     inputs['author'].value,
@@ -128,15 +130,6 @@ function submitBook() {
   );
   bookForm.reset();
   saveAndReload();
-}
-
-// populate the library (if empty) in testing
-if (myLibrary.length === 0) {
-  addBookToLibrary('Microserfs', 'Douglas Coupland', 371, true);
-  addBookToLibrary('Jicroserfs', 'Fouglas Foupland', 371, true);
-  addBookToLibrary('Picroserfs', 'Bouglas Moupland', 371, true);
-  addBookToLibrary('Gicroserfs', 'Oouglas Soupland', 371, true);
-  addBookToLibrary('Sicroserfs', 'Pouglas Doupland', 371, true);
 }
 
 // creates and appends a book element for each book in myLibrary
