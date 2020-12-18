@@ -1,9 +1,11 @@
+// array that holds book objects
 let myLibrary = [];
 
+// retrieve local storage if it exists
 if (localStorage['myLibrary']) {
   myLibrary = JSON.parse(localStorage['myLibrary']);
 } else {
-  //adds my reccomended books
+  // adds my reccomended books
   addBookToLibrary('A Deepness in the Sky', 'Vernor Vinge', 775, false);
   addBookToLibrary('The Day of the Triffids', 'John Wyndham', 228, false);
   addBookToLibrary('Crime and Punishment', 'Fyodor Dostoyevsky', 671, false );
@@ -11,20 +13,21 @@ if (localStorage['myLibrary']) {
   addBookToLibrary('The Fifth Season', 'N.K. Jemisin', 468, false);
 }
 
+// variables for DOM elements
 const bookContainer = document.querySelector('.books-container');
 const bookForm = document.querySelector('.book-form');
 const modal = document.querySelector('.modal');
 const openModal = document.querySelector('open-modal');
 const closeModal = document.querySelector('close-modal');
-const readMe = document.querySelector('.readme-container');
 
-//close modal if user clicks away from it
+// close modal if user clicks away from it
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
 } 
 
+// variable references to the form inputs
 const inputs = {
   'title' : document.querySelector('.book-form #title'),
   'author' : document.querySelector('.book-form #author'),
@@ -150,6 +153,7 @@ function submitBook() {
   saveAndReload();
 }
 
+// creates a tile with a button for adding new books
 function newBookTile() {
   let bookDiv = document.createElement('div');
   bookDiv.classList.add('book');
@@ -174,10 +178,6 @@ function updateDisplay() {
     bookContainer.appendChild(bookDiv(book, index));
   });
   bookContainer.appendChild(newBookTile());
-}
-
-function closeReadme() {
-  readMe.remove();
 }
 
 // DRY function - bad idea?
