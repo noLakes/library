@@ -2,6 +2,13 @@ let myLibrary = [];
 
 if (localStorage['myLibrary']) {
   myLibrary = JSON.parse(localStorage['myLibrary']);
+} else {
+  //adds my reccomended books
+  addBookToLibrary('A Deepnres in the Sky', 'Vernor Vinge', 775, false);
+  addBookToLibrary('The Day of the Triffids', 'John Wyndham', 228, false);
+  addBookToLibrary('Crime and Punishment', 'Fyodor Dostoyevsky', 671, false );
+  addBookToLibrary('The Way of Kings', 'Brandon Sanderson', 1007, false);
+  addBookToLibrary('The Fifth Season', 'N.K. Jemisin', 468, false);
 }
 
 const bookContainer = document.querySelector('.books-container');
@@ -9,6 +16,7 @@ const bookForm = document.querySelector('.book-form');
 const modal = document.querySelector('.modal');
 const openModal = document.querySelector('open-modal');
 const closeModal = document.querySelector('close-modal');
+const readMe = document.querySelector('.readme-container');
 
 //close modal if user clicks away from it
 window.onclick = function(event) {
@@ -166,6 +174,10 @@ function updateDisplay() {
     bookContainer.appendChild(bookDiv(book, index));
   });
   bookContainer.appendChild(newBookTile());
+}
+
+function closeReadme() {
+  readMe.remove();
 }
 
 // DRY function - bad idea?

@@ -287,6 +287,39 @@ button:hover, .form-buttons > *:hover {
   transform: scale(1.05);
 }
 
+.readme-container {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 10px 10px 0px 10px;
+  background-color: var(--udo-light);
+  padding: 1rem;
+  border: 1px solid var(--udo-black);
+  box-shadow: 3px 2px 1px var(--udo-black);
+}
+
+a, span#close-readme {
+  text-decoration: none;
+  color: var(--udo-dark);
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+a:hover {
+  color: #6ca9eb;
+  font-size: 13pt;
+}
+
+span#close-readme {
+  color: rgb(198, 73, 73);
+}
+
+span#close-readme:hover {
+  cursor: pointer;
+  color: rgb(238, 57, 57);
+  font-size: 13pt;
+}
+
 @media only screen and (max-width: 499px) {
   .book {
     max-width: none;
