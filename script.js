@@ -132,12 +132,27 @@ function submitBook() {
   saveAndReload();
 }
 
+function newBookTile() {
+  let bookDiv = document.createElement('div');
+  bookDiv.classList.add('book');
+  bookDiv.classList.add('new-book');
+
+  const button = document.createElement('button');
+  button.classList.add('plus-book');
+  button.innerHTML = '+';
+  //button.addEventListener('click', viewModal);
+  bookDiv.appendChild(button);
+
+  return bookDiv;
+}
+
 // creates and appends a book element for each book in myLibrary
 function updateDisplay() {
   bookContainer.innerHTML = ''
   myLibrary.forEach((book, index) => {
     bookContainer.appendChild(bookDiv(book, index));
   });
+  bookContainer.appendChild(newBookTile());
 }
 
 // DRY function - bad idea?
