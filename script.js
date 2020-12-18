@@ -6,6 +6,16 @@ if (localStorage['myLibrary']) {
 
 const bookContainer = document.querySelector('.books-container');
 const bookForm = document.querySelector('.book-form');
+const modal = document.querySelector('.modal');
+const openModal = document.querySelector('open-modal');
+const closeModal = document.querySelector('close-modal');
+
+//close modal if user clicks away from it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+} 
 
 const inputs = {
   'title' : document.querySelector('.book-form #title'),
@@ -138,9 +148,11 @@ function newBookTile() {
   bookDiv.classList.add('new-book');
 
   const button = document.createElement('button');
-  button.classList.add('plus-book');
+  button.classList.add('open-modal');
   button.innerHTML = '+';
-  //button.addEventListener('click', viewModal);
+  button.onclick = function() {
+    modal.style.display = "block";
+  }
   bookDiv.appendChild(button);
 
   return bookDiv;

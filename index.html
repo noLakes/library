@@ -18,20 +18,38 @@
 
     </div>
 
-    <form class='book-form'>
-      <label for="title">Title</label>
-      <input type="text" name="title" id="title"><br>
-      <label for="title">Author</label>
-      <input type="text" name="author" id="author"><br>
-      <label for="title">Pages</label>
-      <input type="number" name="pages" id="pages"><br>
-      <label for="">Read</label>
-      <input type="radio" name="read" id="read" value='true'>
-      <label for="read">Yes</label>
-      <input type="radio" name="read" id="not_read" value='false'>
-      <label for="not_read">No</label><br>
-      <input type="button" value="Save to Library" onclick="submitBook()">
-    </form>
+    <div class="modal">
+      <div class="modal-content">
+        <form class='book-form'>
+          <ul class="form-list">
+            <li>
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title">
+            </li>
+            <li>
+              <label for="title">Author</label>
+              <input type="text" name="author" id="author">
+            </li>
+            <li>
+              <label for="title">Pages</label>
+              <input type="number" name="pages" id="pages">
+            </li>
+            <li>
+              <label for="">Read</label>
+              <input type="radio" name="read" id="read" value='true'>
+              <label for="read">Yes</label>
+              <input type="radio" name="read" id="not_read" value='false'>
+              <label for="not_read">No</label><br>
+            </li>
+            <li>
+              <input type="button" value="Save to Library" onclick="submitBook()">
+              <button class="close-modal">close</button>
+            </li>
+          </ul>
+
+        </form>
+      </div>
+    </div>
   </div>
 
 
