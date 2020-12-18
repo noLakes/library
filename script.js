@@ -4,7 +4,7 @@ if (localStorage['myLibrary']) {
   myLibrary = JSON.parse(localStorage['myLibrary']);
 } else {
   //adds my reccomended books
-  addBookToLibrary('A Deepnres in the Sky', 'Vernor Vinge', 775, false);
+  addBookToLibrary('A Deepness in the Sky', 'Vernor Vinge', 775, false);
   addBookToLibrary('The Day of the Triffids', 'John Wyndham', 228, false);
   addBookToLibrary('Crime and Punishment', 'Fyodor Dostoyevsky', 671, false );
   addBookToLibrary('The Way of Kings', 'Brandon Sanderson', 1007, false);
