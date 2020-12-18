@@ -133,6 +133,9 @@ html {
 .book {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin: 10px;
   width: 100%;
   max-width: 220px;
@@ -141,18 +144,72 @@ html {
   border-radius: 5%;
   font-size: 18px;
   box-shadow: 3px 2px 1px var(--udo-black);
+  transition: 0.25s;
+}
+
+.book:hover {
+  transform: translateX(-2px) translateY(-2px);
+  box-shadow: 5px 4px 1px #37393deb;
 }
 
 .book ul {
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
+  margin: 0;
 }
 
 .book li {
   list-style: none;
+  font-size: 15px;
+}
+
+li.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--udo-black);
+  padding: 5px 0px;
+  border-bottom: 1px solid var(--udo-mid);
+}
+
+li.author {
+  margin-top: 5px;
+}
+
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin: 1rem 0rem;
+}
+
+button {
+  font-size: 12px;
+  border-radius: 5%;
+  transition: 0.2s;
+}
+
+.button-container button {
+  width: 40%;
+  max-width: 90px;
+}
+
+button:hover {
+  background-color: var(--udo-mid);
+}
+
+.delete-book:hover {
+  background-color: var(--udo-red);
 }
 
 @media only screen and (max-width: 499px) {
   .book {
     max-width: none;
+  }
+
+  .button-container {
+    justify-content: flex-start;
+  }
+
+  .button-container button {
+    margin-left: 1rem;
   }
 }
