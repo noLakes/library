@@ -130,7 +130,7 @@ html {
   max-width: 1200px;
 }
 
-.book, .book-form {
+.book {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -173,12 +173,40 @@ html {
   margin: 15% auto;
   padding: 20px;
   width: 100%;
+  max-width: 480px;
 }
 
 .book-form {
   display: flex;
-  width: fit-content;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--udo-light);
+  border: 1px solid var(--udo-black);
+  border-radius: 5%;
+  width: 100%;
   padding: 1rem;
+}
+
+.form-buttons {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.form-buttons > * {
+  margin-right: 10px;
+}
+
+input {
+  margin: 5px 0px;
+}
+
+input#title, input#author, input#pages {
+  border: 2px solid var(--udo-mid);
+  background-color: var(--udo-white);
+  padding: 3px;
+  border-radius: 4px;
 }
 
 .book:hover {
@@ -215,10 +243,12 @@ li.author {
   margin: 1rem 0rem;
 }
 
-button {
+button, .form-buttons > *  {
   font-size: 12px;
   border-radius: 5%;
   transition: 0.2s;
+  border-color: 1px solid var(--udo-black);
+  border-radius: 5%;
 }
 
 .button-container button {
@@ -226,7 +256,7 @@ button {
   max-width: 90px;
 }
 
-button:hover {
+button:hover, .form-buttons > *:hover {
   background-color: var(--udo-mid);
 }
 
@@ -241,7 +271,7 @@ button:hover {
   margin: 2rem 0rem;
   width: 120px;
   height: 120px;
-  background-color: var(--udo-white);
+  background-color: var(--udo-light);
   border: 1px solid var(--udo-black);
   transition: cubic-bezier(0, 1.1, 1.1, 1) 0.1s;
 }

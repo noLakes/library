@@ -161,6 +161,7 @@ function newBookTile() {
 // creates and appends a book element for each book in myLibrary
 function updateDisplay() {
   bookContainer.innerHTML = ''
+  modal.style.display = 'none';
   myLibrary.forEach((book, index) => {
     bookContainer.appendChild(bookDiv(book, index));
   });
